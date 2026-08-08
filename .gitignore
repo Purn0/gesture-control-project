@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Dataset
+data/*.csv
+data/*.xlsx
+
+# Trained models
+models/*.pkl
+models/*.joblib
+models/*.pth
+models/*.pt
+
+# Generated/output files
+output/
+results/
+runs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archives
+*.zip
+
+# Temporary files
+*.tmp
+*.bak
