@@ -6,9 +6,9 @@ CAMERA_SOURCE = 0  # 0 for webcam, or use an IP camera URL
 # =========================================================
 # Gesture recognition
 # =========================================================
-# If True, the app uses your trained ML model (models/gesture_model.pkl).
-# If the model fails to load for any reason, the app AUTOMATICALLY falls
-# back to the rule-based recognizer, so the demo never goes dark.
+# If True, the app uses the trained model (models/gesture_model.pkl).
+# If the model fails to load, the app falls back to the rule-based
+# recognizer (four gestures).
 USE_ML_MODEL = True
 
 # Predictions below this probability are treated as "Unknown".

@@ -18,13 +18,13 @@ alongside a surface-EMG classifier.
   leakage-aware evaluation script (see [Evaluation](#evaluation)).
 - **Own dataset**: 3,200 landmark samples (400 per gesture) recorded with a
   burst-mode collection tool (`scripts/collect_data.py`), with undo.
-- **Robust control loop**: confidence gate (0.60), 8-frame stability check and
-  1.5 s cooldown, so noisy frames never reach the hardware.
-- **Always demo-able**: if the trained model cannot be loaded, a rule-based
-  recognizer (landmark geometry) takes over automatically; if the Arduino is
-  missing, commands go to a simulator.
-- **Pluggable device backends**: simulator, USB serial (Arduino Uno/Nano) or
-  HTTP (ESP32 access point).
+- **Stable commands**: confidence gate (0.60), 8-frame stability check and
+  1.5 s cooldown, so a single misclassified frame does not trigger anything.
+- **Fallbacks**: if the trained model cannot be loaded, a rule-based
+  recognizer (landmark geometry, four gestures) takes over; if the serial
+  port cannot be opened, commands go to a simulator.
+- **Device backends**: simulator, USB serial (Arduino Uno/Nano), or an HTTP
+  client for an ESP32 access point (the ESP32 firmware is not included).
 
 ## Gestures and actions
 
@@ -92,9 +92,9 @@ In the burst-wise split every gesture is recognized perfectly except one
 held-out *Closed Fist* burst, which is read as *Call Me*: both are folded-finger
 poses that differ mainly in the thumb and little finger.
 
-Limitation: all samples come from one person under one lighting setup, so these
-numbers say how well held-out *repetitions* are recognized, not how well the
-model transfers to other users.
+Limitation: all samples come from one person (the author), so these numbers
+say how well held-out *repetitions* are recognized, not how well the model
+transfers to other users.
 
 ## Hardware
 
@@ -116,16 +116,14 @@ Target: **Arduino Uno** (a Nano works with the same sketch).
   Flyback diode (1N4007) across motor, cathode to 5V side
 ```
 
-No transistor at hand? Use a small 5 V servo instead (signal to pin 9, +5 V,
-GND); the Arduino can power it directly.
-
 **Serial protocol.** 9600 baud, one command per line (`LIGHT_ON\n`, ...).
 The sketch prints `READY` after boot, answers `OK <command>` or
 `UNKNOWN <text>`, and chirps on every accepted command.
 
 ## Setup
 
-Python 3.9 to 3.11 (MediaPipe 0.10.9 has no wheels for newer versions).
+Python 3.11. The versions in `requirements.txt` are the tested ones; MediaPipe
+0.10.9 has no wheels for Python 3.12 or newer.
 
 ```
 python -m venv .venv
@@ -191,14 +189,12 @@ scripts/
   evaluate_model.py            leakage-aware evaluation
 data/gestures.csv              3,200 samples, 8 gestures, 42 features
 arduino/gesture_control/       firmware for Uno / Nano
-docs/                          course presentation of the first (4-gesture) version
 ```
 
 ## History
 
-The first version (April 2026, AI course project) recognized four gestures
-from 960 samples and was demonstrated end to end on an Arduino driving the LED,
-motor and buzzer. The dataset was then re-collected with eight gestures and
+The first version (April 2026) recognized four gestures from 960 samples and
+was demonstrated end to end on an Arduino driving the LED, motor and buzzer. The dataset was then re-collected with eight gestures and
 3,200 samples for the EMG-AI-Arm thesis, where the model controls every
 movement of a simulated arm.
 

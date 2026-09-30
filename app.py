@@ -21,10 +21,9 @@ from ui.overlay import draw_status_panel
 
 def build_recognizer():
     """
-    Prefer the trained ML model. If it fails to load for any reason
-    (missing file, sklearn mismatch, bad pickle, etc.) we fall back to
-    the rule-based recognizer so the live demo ALWAYS has something
-    working. The current working demo is the floor, not the ceiling.
+    Prefer the trained ML model. If it fails to load (missing file,
+    scikit-learn version mismatch, bad pickle, ...), fall back to the
+    rule-based recognizer.
     """
     if USE_ML_MODEL:
         try:

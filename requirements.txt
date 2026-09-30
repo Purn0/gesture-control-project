@@ -1,8 +1,8 @@
-opencv-python
+opencv-python==4.13.0.92
 mediapipe==0.10.9
-numpy
-requests
-pyserial
-scikit-learn
-pandas
-joblib
+numpy==2.4.4
+pandas==3.0.1
+scikit-learn==1.8.0
+joblib==1.5.3
+pyserial==3.5
+requests==2.33.1
