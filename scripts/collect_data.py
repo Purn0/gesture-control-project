@@ -157,7 +157,7 @@ def draw_ui(frame, sample_counts, total_count, hand_detected=False,
     cv2.putText(
         frame,
         f"Burst: {BURST_FRAMES} frames | Interval: {BURST_INTERVAL_SECONDS:.2f}s",
-        (10, 60),
+        (10, 80),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.55,
         (200, 255, 200),
@@ -167,14 +167,14 @@ def draw_ui(frame, sample_counts, total_count, hand_detected=False,
     cv2.putText(
         frame,
         f"CSV: {CSV_PATH}",
-        (10, 88),
+        (10, 102),
         cv2.FONT_HERSHEY_SIMPLEX,
         0.42,
         (180, 180, 180),
         1
     )
 
-    y = 120
+    y = 132
     cv2.putText(
         frame,
         f"Total samples: {total_count}",

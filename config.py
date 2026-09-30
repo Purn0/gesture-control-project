@@ -38,7 +38,7 @@ FONT_THICKNESS = 2
 # IMPORTANT: set this to "simulator" whenever the Arduino is NOT plugged in.
 # If a ghost COM port exists (leftover driver) and "serial" is selected, the
 # app can open the port but then hang on the first write.
-DEVICE_BACKEND = "serial"
+DEVICE_BACKEND = "simulator"
 
 # Kept for backwards compatibility with older code paths.
 ENABLE_SIMULATOR = (DEVICE_BACKEND == "simulator")
@@ -56,10 +56,13 @@ ESP32_BASE_URL = "http://192.168.4.1"
 # =========================================================
 # Gesture -> command mapping
 # =========================================================
+# The trained model recognises eight gestures (Open_Palm, Closed_Fist,
+# Thumb_Up, Thumb_Down, Victory, Pointing_Up, Rock, Call_Me). Gestures not
+# listed here are shown on screen but send nothing.
 SUPPORTED_GESTURES = {
     "Open_Palm":   "LIGHT_ON",
     "Closed_Fist": "LIGHT_OFF",
     "Thumb_Up":    "FAN_ON",
     "Victory":     "FAN_OFF",
-    # "Pointing_Up": "DOOR_TOGGLE",  # enable after you add this class to the dataset
+    # "Pointing_Up": "DOOR_TOGGLE",  # state is tracked; the sketch has no door actuator yet
 }

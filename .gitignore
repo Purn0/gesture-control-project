@@ -20,9 +20,10 @@ ENV/
 logs/
 *.log
 
-# Dataset
+# Dataset (the 8-gesture landmark dataset is published; older working copies are not)
 data/*.csv
 data/*.xlsx
+!data/gestures.csv
 
 # Trained models
 models/*.pkl

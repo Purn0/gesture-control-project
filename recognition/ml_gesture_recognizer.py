@@ -8,11 +8,6 @@ import pandas as pd
 from dataclasses import dataclass
 from typing import Optional, List, Tuple
 
-# Column names the model was trained with (train_model.py assigns f0..f41).
-# We re-use them at predict time so sklearn doesn't emit a warning.
-_FEATURE_COLUMNS = [f"f{i}" for i in range(42)]
-
-
 @dataclass
 class GestureResult:
     gesture_name: str
