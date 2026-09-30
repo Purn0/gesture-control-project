@@ -85,11 +85,17 @@ class MLGestureRecognizer:
                     columns=self.model.feature_names_in_
                 )
 
-                predicted_label = self.model.predict(features_df)[0]
-                score = 1.0
+                # One forest pass per frame: a Random Forest's predict() is
+                # the argmax of predict_proba(), and each pass over 500 trees
+                # costs tens of milliseconds.
                 if hasattr(self.model, "predict_proba"):
                     probs = self.model.predict_proba(features_df)[0]
-                    score = float(np.max(probs))
+                    best = int(np.argmax(probs))
+                    predicted_label = self.model.classes_[best]
+                    score = float(probs[best])
+                else:
+                    predicted_label = self.model.predict(features_df)[0]
+                    score = 1.0
 
                 # Confidence gate: below threshold -> Unknown
                 if score < self.confidence_threshold:
